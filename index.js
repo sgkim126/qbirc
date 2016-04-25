@@ -7,6 +7,7 @@ var Emitter = require('events').EventEmitter;
 var debug = require('debug')('qbirc');
 var Parser = require('qbirc-parser');
 var replies = require('irc-replies');
+var Promise = require('bluebird');
 
 /**
  * Core plugins.
@@ -411,3 +412,10 @@ Client.prototype.onmessage = function(msg) {
 function toArray(val) {
   return Array.isArray(val) ? val : [val];
 }
+
+
+/**
+ * Add async methods that return a promise.
+ */
+
+Promise.promisifyAll(Client.prototype);
